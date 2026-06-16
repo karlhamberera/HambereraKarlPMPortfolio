@@ -1,13 +1,375 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="refresh" content="0; url=site/">
-    <title>Hamberera Karl PM Portfolio</title>
-    <link rel="canonical" href="site/">
-  </head>
-  <body>
-    <p><a href="site/">Open Hamberera Karl PM portfolio</a></p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hamberera Karl PM | SiteSpy Portfolio</title>
+  <meta name="description" content="Hamberera Karl PM — Data Model Documentation — SiteSpy student portfolio showcasing contribution evidence, certificates, and project reflection." />
+  <meta property="og:title" content="Hamberera Karl PM | SiteSpy Portfolio" />
+  <meta property="og:description" content="Data Model Documentation — Electrical Engineering" />
+  <meta property="og:url" content="https://karlhamberera.github.io/HambereraKarlPMPortfolio/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0A0915;
+      --surface: #12101E;
+      --text: #F0EFFF;
+      --muted: #8A86B8;
+      --accent: #818CF8;
+      --border: #22204A;
+      --gold: #F59E0B;
+      --success: #34D399;
+      --radius: 14px;
+      --gap: 16px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code {
+      font-family: "Fira Mono", "Cascadia Code", monospace;
+      background: var(--bg);
+      color: var(--accent);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.87em;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, #12101E 0%, #0A0915 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 24px 40px;
+    }
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      align-items: center;
+    }
+    .hero-text { flex: 1 1 340px; }
+    .hero-photo { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .wordmark { font-size: 1.1rem; font-weight: 900; color: var(--accent); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+    h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 900; color: var(--text); line-height: 1.1; margin-bottom: 10px; }
+    .role-badge {
+      display: inline-block;
+      background: var(--accent);
+      color: #0A0915;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .dept { color: var(--muted); font-size: 0.9rem; margin-bottom: 14px; }
+    .hero-links { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .hero-link { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); }
+    .hero-link a { color: var(--accent); }
+    .hero-link.gold a { color: var(--gold); }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent); color: #0A0915;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 10px 20px; border-radius: 8px;
+      border: none; cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; text-decoration: none; }
+    .profile-img {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 24px #818CF855;
+    }
+    .profile-placeholder {
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .contributor-badge {
+      background: var(--success);
+      color: #0A0915;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 6px;
+    }
+
+    /* ── Layout ── */
+    .main { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: var(--gap);
+    }
+    .card-left-accent {
+      border-left: 4px solid var(--accent);
+    }
+    .section-header { margin-bottom: 14px; }
+    .section-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-header h2::after {
+      content: "";
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 4px;
+      margin-left: 0;
+      margin-top: 6px;
+    }
+    .section-title-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .section-title-row h2 { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .accent-bar { width: 40px; height: 3px; background: var(--accent); border-radius: 4px; }
+
+    /* ── About SiteSpy ── */
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .pill {
+      background: var(--accent);
+      color: #0A0915;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 12px;
+    }
+    .pill.gold { background: var(--gold); }
+    .pill.success { background: var(--success); }
+
+    /* ── Skills chips ── */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      background: var(--accent);
+      color: #0A0915;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 13px;
+      border-radius: 14px;
+    }
+
+    /* ── Files list ── */
+    .files-list { list-style: none; padding: 0; margin-top: 10px; }
+    .files-list li { padding: 5px 0; display: flex; align-items: center; gap: 8px; }
+    .files-list li::before { content: "📄"; font-size: 0.9rem; }
+
+    /* ── Stats grid ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: var(--gap);
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 4px; }
+    .stat-value { font-size: 2rem; font-weight: 900; color: var(--accent); }
+    .stat-card.gold .stat-value { color: var(--gold); }
+    .stat-card.success .stat-value { color: var(--success); }
+    .stat-card.muted .stat-value { color: var(--muted); }
+
+    /* ── GitHub evidence ── */
+    .gh-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 10px; }
+    .gh-img-wrap { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+    .gh-img-wrap img { width: 100%; border-radius: 6px; display: block; }
+    .img-label { font-size: 0.73rem; color: var(--muted); margin-top: 6px; }
+
+    /* ── Certificates ── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 10px; }
+    .cert-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      text-align: center;
+    }
+    .cert-icon { font-size: 2.2rem; }
+    .cert-name { font-size: 0.82rem; color: var(--text); flex: 1; }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      padding: 5px 14px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: background 0.15s;
+    }
+    .btn-outline:hover { background: var(--accent); color: #0A0915; text-decoration: none; }
+
+    /* ── Video ── */
+    .video-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      text-align: center;
+    }
+    .play-icon { font-size: 3rem; color: var(--accent); }
+    .video-label { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .video-sub { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── Reports ── */
+    .report-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .report-row:last-child { border-bottom: none; }
+    .pdf-icon { font-size: 1.1rem; }
+    .btn-link { margin-left: auto; color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+
+    /* ── Empty state ── */
+    .empty-msg {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+    }
+    footer p { font-size: 0.85rem; color: var(--muted); }
+    footer strong { color: var(--text); }
+
+    @media (max-width: 600px) {
+      .hero { padding: 32px 16px; }
+      .main { padding: 20px 14px 40px; }
+      .card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="wordmark">SiteSpy</div>
+      <h1>Hamberera Karl PM</h1>
+      <span class="role-badge">Data Model Documentation</span>
+      <p class="dept">Electrical Engineering</p>
+      <div class="hero-links">
+        <div class="hero-link">📧 <a href="mailto:Karlhamberera24@gmail.com">Karlhamberera24@gmail.com</a></div>
+        <div class="hero-link">⬛ <a href="https://github.com/karlhamberera" target="_blank">github.com/karlhamberera</a></div>
+        <div class="hero-link gold">🔗 <a href="https://karlhamberera.github.io/HambereraKarlPMPortfolio/" target="_blank">https://karlhamberera.github.io/HambereraKarlPMPortfolio/</a></div>
+      </div>
+      <a href="https://karlhamberera.github.io/HambereraKarlPMPortfolio/" class="btn-primary" target="_blank">View Live Site ↗</a>
+    </div>
+    <div class="hero-photo">
+      <div class="profile-placeholder"><span>👤</span></div>
+      <span class="contributor-badge">SiteSpy Contributor</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- About SiteSpy -->
+  <div class="card">
+    <div class="section-title-row"><h2>🏗 About SiteSpy</h2><div class="accent-bar"></div></div>
+    <p>SiteSpy is a mobile-first construction project records and estimation app built with Expo React Native, Firebase, and Firestore. It helps construction teams capture measurements, estimate material costs, organise site records, and review project history on any device — even in low-connectivity field conditions.</p>
+    <div class="tech-pills">
+      <span class="pill">React Native</span>
+      <span class="pill gold">Expo</span>
+      <span class="pill success">Firebase</span>
+    </div>
+  </div>
+
+  <!-- My Contribution -->
+  <div class="card">
+    <div class="section-title-row"><h2>👤 My Contribution</h2><div class="accent-bar"></div></div>
+    <p>I took ownership of documenting the Firestore data model that SiteSpy relies on. This means writing clear, accurate documentation about how projects, estimates, and user records are structured in the database. I also set up and reviewed the Firestore indexes (firestore.indexes.json) that ensure queries run efficiently, and produced the Firebase Setup Guide so future developers can configure the backend without guessing.</p>
+    <p style="margin-top:14px;font-size:0.85rem;color:var(--muted);font-weight:600;">Files I worked on:</p>
+    <ul class="files-list">
+      <li><code>docs/Firebase_Setup_Guide.md</code></li><li><code>shared/data-model.md</code></li><li><code>firestore.indexes.json</code></li>
+    </ul>
+  </div>
+
+  <!-- Skills -->
+  <div class="card">
+    <div class="section-title-row"><h2>🔧 Tools &amp; Skills</h2><div class="accent-bar"></div></div>
+    <div class="chips"><span class="chip">Firestore</span> <span class="chip">Data Modelling</span> <span class="chip">Technical Writing</span> <span class="chip">Firebase CLI</span> <span class="chip">JSON</span> <span class="chip">Git</span></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card"><p class="stat-label">Files Touched</p><p class="stat-value">3</p></div>
+    <div class="stat-card gold"><p class="stat-label">Certificates</p><p class="stat-value">0</p></div>
+    <div class="stat-card success"><p class="stat-label">GitHub Evidence</p><p class="stat-value">0</p></div>
+    <div class="stat-card muted"><p class="stat-label">Reports</p><p class="stat-value">2</p></div>
+  </div>
+
+  <!-- GitHub Evidence -->
+  <div class="card">
+    <div class="section-title-row"><h2>📸 GitHub Evidence</h2><div class="accent-bar"></div></div>
+    <div class="gh-grid"><p class="empty-msg">ℹ No GitHub screenshots were provided for this portfolio.</p></div>
+  </div>
+
+  <!-- Certificates -->
+  <div class="card">
+    <div class="section-title-row"><h2>🏆 Certificates</h2><div class="accent-bar"></div></div>
+    <div class="cert-grid"><p class="empty-msg">ℹ No certificates were uploaded for this portfolio.</p></div>
+  </div>
+
+  <!-- Contribution Video -->
+  <div class="card">
+    <div class="section-title-row"><h2>🎬 Contribution Video</h2><div class="accent-bar"></div></div>
+    <p class="empty-msg">ℹ Contribution video was not uploaded for this portfolio.</p>
+  </div>
+
+  <!-- Reports -->
+  <div class="card">
+    <div class="section-title-row"><h2>📋 Reports &amp; Documents</h2><div class="accent-bar"></div></div>
+    <div class="report-row"><span class="pdf-icon">📄</span><span>contribution-report.pdf</span><a href="docs/contribution-report.pdf" target="_blank" class="btn-link">Open →</a></div><div class="report-row"><span class="pdf-icon">📄</span><span>presentation-guide.pdf</span><a href="docs/presentation-guide.pdf" target="_blank" class="btn-link">Open →</a></div>
+  </div>
+
+  <!-- Reflection -->
+  <div class="card card-left-accent">
+    <div class="section-title-row"><h2>💡 Reflection</h2><div class="accent-bar"></div></div>
+    <p>Documentation work looks unglamorous but it is where knowledge lives. I found that writing precise data model descriptions forced me to deeply understand how each Firestore collection relates to the others. The index configuration work taught me that bad indexes cause query timeouts that look like bugs — clear documentation prevents that.</p>
+  </div>
+
+</main>
+
+<footer>
+  <p><strong>Hamberera Karl PM</strong> &nbsp;·&nbsp; Data Model Documentation &nbsp;·&nbsp; <a href="https://github.com/karlhamberera">karlhamberera</a></p>
+  <p style="margin-top:6px;">SiteSpy Expo Project &nbsp;·&nbsp; Student Portfolio</p>
+</footer>
+
+</body>
 </html>
